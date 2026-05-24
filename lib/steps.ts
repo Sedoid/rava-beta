@@ -1,0 +1,263 @@
+import type { Step } from "./types";
+
+export const STEPS: Step[] = [
+  // ── TAB 1: SETUP ─────────────────────────────────────────
+  {
+    id: "step-1",
+    globalNumber: 1,
+    tabId: "setup",
+    label: "01 / Setup",
+    title: "Download & Install",
+    description: "Download the app and install it on your Android device.",
+    actionItems: [
+      "Download the APK from the link sent to you",
+      "Open your file manager and locate the downloaded APK",
+      "Tap the APK to begin installation",
+      "If prompted, go to Settings → enable Install from unknown sources for your file manager",
+      "Tap Install and wait for completion",
+      "Open RAVA from your home screen",
+    ],
+    warning:
+      'You may need to enable "Install from unknown sources" — this is normal for beta APKs and safe to do temporarily.',
+    capturesIdentity: true,
+    notesPlaceholder: "Any issues during install?",
+  },
+  {
+    id: "step-2",
+    globalNumber: 2,
+    tabId: "setup",
+    label: "02 / Setup",
+    title: "Onboarding & Sign In",
+    description: "Set up your account and grant the permissions RAVA needs to work.",
+    actionItems: [
+      "Swipe through the welcome screens",
+      "On the permissions screen, tap Allow for all requested permissions",
+      "Select your preferred language and currency",
+      "Enter your phone number on the authentication screen",
+      "Enter the OTP sent to your phone via SMS",
+      "Select your account type — Personal or Business",
+      "Complete setup and proceed into the app",
+    ],
+    notesPlaceholder: "Any step that felt confusing or broke?",
+  },
+  {
+    id: "step-3",
+    globalNumber: 3,
+    tabId: "setup",
+    label: "03 / Setup",
+    title: "Grant Access & Import",
+    description: "Allow SMS access so RAVA can detect and import your transactions.",
+    actionItems: [
+      "When prompted for SMS access, tap Allow",
+      "On the institutions screen, select your provider — MTN MoMo, Orange Money, or both",
+      "Wait for the app to scan and import your transaction history",
+      "Confirm transactions are appearing in the app",
+      "If transactions are missing → Settings → Connected Services → verify your provider is linked",
+    ],
+    warning:
+      "SMS access is required for automatic transaction detection. Transactions are processed locally on your device — nothing is uploaded without your consent.",
+    notesPlaceholder:
+      "Did your transactions import correctly? Roughly how many appeared?",
+  },
+
+  // ── TAB 2: CONFIGURE ─────────────────────────────────────
+  {
+    id: "step-4",
+    globalNumber: 4,
+    tabId: "configure",
+    label: "04 / Configure",
+    title: "Configure Your Preferences",
+    description: "Personalise the app to match your preferences and region.",
+    actionItems: [
+      "Tap the Settings icon from main navigation",
+      "Under Preferences → set your preferred theme (Light or Dark)",
+      "Set your date format and number format to match your region",
+      "Enable Biometric Authentication if your device supports it",
+      "Review your currency selection and update if needed",
+      "Explore Backup settings → toggle automatic backup on",
+    ],
+    warning:
+      "Some settings (biometric, backup) may behave differently depending on your device model and Android version.",
+    notesPlaceholder: "Any setting that was missing, unclear, or didn't work?",
+  },
+
+  // ── TAB 3: EXPLORE ───────────────────────────────────────
+  {
+    id: "step-5",
+    globalNumber: 5,
+    tabId: "explore",
+    label: "05 / Explore",
+    title: "Explore the Dashboard",
+    description: "Explore your financial overview and key insights on the home screen.",
+    actionItems: [
+      "From the home screen, observe your total balance and recent transactions",
+      "Scroll down to see your budget summary cards",
+      "Check the weekly and monthly spending charts",
+      "Tap the eye icon to test the hide/show data toggle",
+      "Tap a budget card to preview spending against that budget",
+      "Review your financial health score displayed on the dashboard",
+    ],
+    hasStars: true,
+    notesPlaceholder: "What would you improve on the dashboard?",
+  },
+  {
+    id: "step-6",
+    globalNumber: 6,
+    tabId: "explore",
+    label: "06 / Explore",
+    title: "Transactions & Analytics",
+    description: "Browse your full transaction history and dive into the analytics.",
+    actionItems: [
+      "Navigate to the Transactions tab from the bottom navigation",
+      "Scroll through your full transaction history",
+      "Use the search bar to look up a transaction by name or amount",
+      "Apply filters — by date range, type (income or expense), or category",
+      "Tap any transaction to open its detail view",
+      "Navigate to Analytics → select Annual Summary to view yearly statistics",
+      "Tap through previous years to compare annual data",
+    ],
+    hasStars: true,
+    notesPlaceholder: "What was hard to find? What felt intuitive?",
+  },
+
+  // ── TAB 4: ORGANISE ──────────────────────────────────────
+  {
+    id: "step-7",
+    globalNumber: 7,
+    tabId: "organise",
+    label: "07 / Organise",
+    title: "Create Categories",
+    description: "Build a category system to keep your spending organised.",
+    actionItems: [
+      "Go to the Categories section from the menu or navigation",
+      "Tap the button to create a new category",
+      "Enter a category name (e.g. Food, Transport, Airtime)",
+      "Select an icon and colour for the category",
+      "Choose the category type — Expense or Income",
+      "Save and repeat to create at least 3–5 categories",
+    ],
+    notesPlaceholder: "How intuitive was the category creation flow?",
+  },
+  {
+    id: "step-8",
+    globalNumber: 8,
+    tabId: "organise",
+    label: "08 / Organise",
+    title: "Bulk Categorise Transactions",
+    description: "Assign categories to your transactions in bulk.",
+    actionItems: [
+      "Navigate to Bulk Categorization from the menu",
+      "Review the list of uncategorised transactions",
+      "Select multiple transactions by tapping them",
+      "Choose a category to assign to the selected group",
+      "Tap Apply to categorise them all at once",
+      "Repeat for other groups until most transactions are categorised",
+    ],
+    hasStars: true,
+    notesPlaceholder: "How smooth was the bulk selection experience?",
+  },
+  {
+    id: "step-9",
+    globalNumber: 9,
+    tabId: "organise",
+    label: "09 / Organise",
+    title: "Reinspect Annual Stats",
+    description: "Review how your analytics look now that transactions are categorised.",
+    actionItems: [
+      "Return to the Analytics section",
+      "Open the Annual Summary view",
+      "Observe how the category breakdown has updated after your categorisation",
+      "Check the pie or bar chart for spending distribution by category",
+      "Tap individual categories to drill into the monthly breakdown",
+      "Compare income vs. expense totals for the year",
+    ],
+    hasStars: true,
+    notesPlaceholder:
+      "How clear and useful is the analytics view after categorisation?",
+  },
+
+  // ── TAB 5: ADVANCED ──────────────────────────────────────
+  {
+    id: "step-10",
+    globalNumber: 10,
+    tabId: "advanced",
+    label: "10 / Advanced",
+    title: "Configure Smart Alerts",
+    description: "Set up smart notifications to stay on top of your finances.",
+    actionItems: [
+      "Go to Smart Alerts from the menu",
+      "Under Spending Insights → enable alerts for budget thresholds and unusual spending",
+      "Under Transaction Intelligence → enable large transaction alerts and duplicate detection",
+      "Under Goals & Savings → enable savings progress and low balance alerts",
+      "Save your preferences",
+      "Check the Notifications inbox to confirm alerts are appearing",
+    ],
+    notesPlaceholder: "Did the alerts make sense? Were any missing or confusing?",
+  },
+  {
+    id: "step-11",
+    globalNumber: 11,
+    tabId: "advanced",
+    label: "11 / Advanced",
+    title: "Create a Budget",
+    description: "Create budgets for your spending categories.",
+    actionItems: [
+      "Navigate to the Budget section",
+      "Tap the button to create a new budget",
+      "Select a category you created earlier",
+      "Set a spending limit for the budget period",
+      "Choose the period — this month or a custom range",
+      "Save and repeat for 2–3 of your categories",
+      "Return to the dashboard and confirm budgets appear on the overview cards",
+    ],
+    hasStars: true,
+    notesPlaceholder: "How straightforward was budget creation?",
+  },
+  {
+    id: "step-12",
+    globalNumber: 12,
+    tabId: "advanced",
+    label: "12 / Advanced",
+    title: "Financial Plan & Goals",
+    description: "Build a financial plan and set savings goals.",
+    actionItems: [
+      "Navigate to Financial Profile or Planning from the menu",
+      "Tap Create Financial Plan",
+      "Browse available plan templates → select one that fits your situation",
+      "Fill in the required details — income, expenses, savings target",
+      "Save the plan",
+      "Within the plan or Goals section → tap to create a new savings goal",
+      "Enter a goal name, target amount, and target date",
+      "Save and confirm the goal appears in your profile or goals list",
+    ],
+    notesPlaceholder:
+      "Did the planning flow make sense for how you actually think about your finances?",
+  },
+  {
+    id: "step-13",
+    globalNumber: 13,
+    tabId: "advanced",
+    label: "13 / Advanced",
+    title: "AI Insights & Chat",
+    description: "Explore AI-powered insights and chat with your financial assistant.",
+    actionItems: [
+      "Navigate to AI Insights from the menu",
+      "Read through the generated insights and recommendations",
+      "Tap an insight to expand the details",
+      "Open the AI Chat feature",
+      'Type a question about your finances — e.g. "Where am I overspending?" or "How can I save more?"',
+      "Review the response and ask at least one follow-up question",
+      "Check Chat Sessions to confirm your conversation history is saved",
+    ],
+    hasStars: true,
+    notesPlaceholder: "Any suggestions for what the AI should do better?",
+  },
+];
+
+export function getStepsForTab(tabId: string): Step[] {
+  return STEPS.filter((s) => s.tabId === tabId);
+}
+
+export function getStepById(id: string): Step | undefined {
+  return STEPS.find((s) => s.id === id);
+}

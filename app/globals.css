@@ -1,26 +1,52 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Backgrounds */
+  --color-rava-bg: #090D1F;
+  --color-rava-sidebar: #090E1F;
+  --color-rava-surface: rgba(20, 28, 60, 0.96);
+  --color-rava-surface2: rgba(10, 16, 36, 0.92);
+
+  /* Brand */
+  --color-rava-purple: #8C52FF;
+  --color-rava-pink: #F34F9A;
+  --color-rava-primary: #24135F;
+  --color-rava-track: #1A2247;
+
+  /* Semantic */
+  --color-rava-green: #22C55E;
+  --color-rava-red: #EF4444;
+  --color-rava-amber: #FF9F43;
+  --color-rava-blue: #3B82F6;
+
+  /* Text */
+  --color-rava-text: #FFFFFF;
+  --color-rava-muted: rgba(255, 255, 255, 0.60);
+
+  /* Font aliases — all point to Inter so existing inline fontFamily vars still resolve */
+  --font-syne: var(--font-inter);
+  --font-dm-sans: var(--font-inter);
+  --font-dm-mono: var(--font-inter);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Global resets */
+* {
+  box-sizing: border-box;
 }
 
+html,
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: #090D1F;
+  color: #FFFFFF;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Hide scrollbar globally */
+::-webkit-scrollbar {
+  display: none;
+}
+* {
+  scrollbar-width: none;
 }
