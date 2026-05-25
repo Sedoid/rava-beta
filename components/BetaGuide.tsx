@@ -190,15 +190,6 @@ export default function BetaGuide() {
           {/* Hero section */}
           <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4 md:gap-6 md:mb-8">
             <div className="text-center md:text-left">
-              <p
-                className="text-[10px] uppercase tracking-widest font-semibold mb-2"
-                style={{
-                  fontFamily: "var(--font-inter)",
-                  color: "rgba(255,255,255,0.35)",
-                }}
-              >
-                RAVA Beta Testing Guide
-              </p>
               <h1
                 style={{
                   fontFamily: "var(--font-inter)",
