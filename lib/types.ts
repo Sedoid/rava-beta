@@ -41,6 +41,8 @@ export interface Step {
   description?: string; // one-line subtitle shown below title
   actionItems: string[];
   warning?: string;
+  warningColor?: string;
+  downloadUrl?: string;
   videoUrl?: string;
   hasStars?: boolean; // steps 5, 6, 8, 9, 11, 13
   notesPlaceholder: string;

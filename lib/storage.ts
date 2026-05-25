@@ -1,3 +1,5 @@
+import { db } from "./firebase";
+import { doc, setDoc, collection, getDocs, orderBy, query } from "firebase/firestore";
 import type { Session, StepResponse } from "./types";
 
 const FEEDBACK_PREFIX = "rava_feedback:";
@@ -73,4 +75,16 @@ export function loadProgress(): ProgressSnapshot | null {
 export function clearProgress(): void {
   if (typeof window === "undefined") return;
   localStorage.removeItem(PROGRESS_KEY);
+}
+
+// ── Firestore ──────────────────────────────────────────────────────────────
+
+export async function saveSessionToFirestore(session: Session): Promise<void> {
+  await setDoc(doc(db, "sessions", session.session), session);
+}
+
+export async function getAllSessionsFromFirestore(): Promise<Session[]> {
+  const q = query(collection(db, "sessions"), orderBy("ts", "desc"));
+  const snap = await getDocs(q);
+  return snap.docs.map((d) => d.data() as Session);
 }

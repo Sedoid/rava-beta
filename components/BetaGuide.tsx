@@ -7,6 +7,7 @@ import { STEPS, getStepsForTab } from "@/lib/steps";
 import {
   getOrCreateSessionId,
   saveSession,
+  saveSessionToFirestore,
   saveProgress,
   loadProgress,
   clearProgress,
@@ -30,6 +31,7 @@ export default function BetaGuide() {
   );
   const [tester, setTester] = useState<TesterInfo>({ name: "", device: "" });
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const direction = useRef<1 | -1>(1);
   const hydrated = useRef(false);
   const tabSectionRef = useRef<HTMLDivElement>(null);
@@ -84,19 +86,31 @@ export default function BetaGuide() {
     setStepInTab(0);
   }
 
-  function handleContinue() {
+  function autoSave() {
+    const sessionId = getOrCreateSessionId();
+    saveSessionToFirestore({
+      session: sessionId,
+      ts: new Date().toISOString(),
+      tester,
+      steps: responses,
+    }).catch((err) => console.error("Auto-save failed", err));
+  }
+
+  async function handleContinue() {
     tabSectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
     if (stepInTab < tabSteps.length - 1) {
+      autoSave();
       direction.current = 1;
       setStepInTab((i) => i + 1);
     } else {
       const nextTabIndex = activeTabIndex + 1;
       if (nextTabIndex < TABS.length) {
+        autoSave();
         direction.current = 1;
         setActiveTabIndex(nextTabIndex);
         setStepInTab(0);
       } else {
-        handleSubmit();
+        await handleSubmit();
       }
     }
   }
@@ -114,15 +128,23 @@ export default function BetaGuide() {
     }
   }
 
-  function handleSubmit() {
+  async function handleSubmit() {
+    setSubmitting(true);
     const sessionId = getOrCreateSessionId();
-    saveSession({
+    const sessionData = {
       session: sessionId,
       ts: new Date().toISOString(),
       tester,
       steps: responses,
-    });
+    };
+    saveSession(sessionData); // localStorage backup
+    try {
+      await saveSessionToFirestore(sessionData);
+    } catch (err) {
+      console.error("Firestore save failed — data preserved in localStorage", err);
+    }
     clearProgress();
+    setSubmitting(false);
     setSubmitted(true);
   }
 
@@ -302,6 +324,7 @@ export default function BetaGuide() {
                 onBack={handleBack}
                 isFirst={isVeryFirst}
                 isLast={isVeryLast}
+                isSubmitting={submitting}
               />
             </motion.div>
           </AnimatePresence>

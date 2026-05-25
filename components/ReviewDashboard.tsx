@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { getAllSessions } from "@/lib/storage";
+import { getAllSessionsFromFirestore } from "@/lib/storage";
 import { STEPS } from "@/lib/steps";
 import { TABS } from "@/lib/tabs";
 import type { Session, StepStatus } from "@/lib/types";
@@ -43,7 +43,7 @@ export default function ReviewDashboard() {
   const [expanded, setExpanded] = useState<Set<string>>(new Set());
 
   useEffect(() => {
-    setSessions(getAllSessions());
+    getAllSessionsFromFirestore().then(setSessions).catch(console.error);
   }, []);
 
   const toggle = (id: string) =>

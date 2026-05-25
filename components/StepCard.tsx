@@ -20,6 +20,7 @@ interface StepCardProps {
   onBack: () => void;
   isFirst: boolean;
   isLast: boolean;
+  isSubmitting?: boolean;
 }
 
 export default function StepCard({
@@ -35,8 +36,9 @@ export default function StepCard({
   onBack,
   isFirst,
   isLast,
+  isSubmitting = false,
 }: StepCardProps) {
-  const canContinue = response.status !== null;
+  const canContinue = response.status !== null && !isSubmitting;
 
   return (
     <div className="lg:grid lg:grid-cols-[2fr_1fr] lg:gap-6 lg:items-start">
@@ -110,8 +112,44 @@ export default function StepCard({
         {/* Action block */}
         <ActionBlock items={step.actionItems} />
 
+        {/* Play Store download button */}
+        {step.downloadUrl && (
+          <a
+            href={step.downloadUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center gap-3 w-full mb-3 md:mb-5 py-3.5 rounded-xl transition-all"
+            style={{
+              background: "linear-gradient(90deg, #8C52FF 0%, #F34F9A 100%)",
+              boxShadow: "0 0 24px rgba(140,82,255,0.35)",
+              textDecoration: "none",
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.9")}
+            onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
+          >
+            {/* Play Store icon */}
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden>
+              <path
+                d="M3 3.5C3 2.67 3.9 2.15 4.6 2.58L21 12 4.6 21.42C3.9 21.85 3 21.33 3 20.5V3.5Z"
+                fill="#FFFFFF"
+              />
+            </svg>
+            <span
+              style={{
+                fontFamily: "var(--font-inter)",
+                fontSize: 14,
+                fontWeight: 700,
+                color: "#FFFFFF",
+                letterSpacing: "0.01em",
+              }}
+            >
+              Download on Google Play
+            </span>
+          </a>
+        )}
+
         {/* Warning */}
-        {step.warning && <WarningBlock text={step.warning} />}
+        {step.warning && <WarningBlock text={step.warning} color={step.warningColor} />}
 
         {/* Identity fields — Step 1 only, lives in the left panel */}
         {step.capturesIdentity && (
@@ -186,7 +224,9 @@ export default function StepCard({
               boxShadow: canContinue ? "0 0 18px rgba(140,82,255,0.3)" : "none",
             }}
           >
-            {isLast ? "Submit Feedback" : `Continue to Step ${step.globalNumber + 1} →`}
+            {isLast
+              ? isSubmitting ? "Submitting…" : "Submit Feedback"
+              : `Continue to Step ${step.globalNumber + 1} →`}
           </button>
         </div>
 
