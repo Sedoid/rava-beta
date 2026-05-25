@@ -45,4 +45,5 @@ export interface Step {
   hasStars?: boolean; // steps 5, 6, 8, 9, 11, 13
   notesPlaceholder: string;
   capturesIdentity?: boolean; // Step 1 only
+  trackLabel?: string;
 }

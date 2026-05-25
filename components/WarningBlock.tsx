@@ -5,7 +5,7 @@ interface WarningBlockProps {
 export default function WarningBlock({ text }: WarningBlockProps) {
   return (
     <div
-      className="rounded-r-xl mb-5 px-5 py-4 flex gap-3"
+      className="rounded-r-xl mb-3 px-3 py-3 md:mb-5 md:px-5 md:py-4 flex gap-2"
       style={{
         borderLeft: "3px solid rgba(255,159,67,0.8)",
         background: "rgba(255, 159, 67, 0.08)",

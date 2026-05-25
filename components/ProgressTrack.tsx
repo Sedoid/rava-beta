@@ -12,7 +12,7 @@ export default function ProgressTrack({
   completedIds,
 }: ProgressTrackProps) {
   return (
-    <div className="flex items-start overflow-x-auto py-1">
+    <div className="flex items-start justify-center py-1" style={{ width: "max-content", minWidth: "100%" }}>
       {steps.map((step, i) => {
         const isDone = completedIds.has(step.id);
         const isActive = i === currentIndex && !isDone;
@@ -57,7 +57,7 @@ export default function ProgressTrack({
                   lineHeight: 1.35,
                 }}
               >
-                {step.title.split(" ").slice(0, 3).join(" ")}
+                {step.trackLabel ?? step.title.split(" ").slice(0, 2).join(" ")}
               </span>
             </div>
 

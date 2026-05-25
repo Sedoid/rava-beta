@@ -32,6 +32,7 @@ export default function BetaGuide() {
   const [submitted, setSubmitted] = useState(false);
   const direction = useRef<1 | -1>(1);
   const hydrated = useRef(false);
+  const tabSectionRef = useRef<HTMLDivElement>(null);
 
   // Restore progress on mount
   useEffect(() => {
@@ -84,6 +85,7 @@ export default function BetaGuide() {
   }
 
   function handleContinue() {
+    tabSectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
     if (stepInTab < tabSteps.length - 1) {
       direction.current = 1;
       setStepInTab((i) => i + 1);
@@ -162,19 +164,10 @@ export default function BetaGuide() {
         {/* Sticky header */}
         <AppHeader />
 
-        {/* Mobile tab bar (hidden on desktop) */}
-        <TabBar
-          tabs={TABS}
-          activeTabIndex={activeTabIndex}
-          completedTabs={completedTabs}
-          responses={responses}
-          onTabChange={handleTabChange}
-        />
-
-        <div className="flex-1 px-4 md:px-6 lg:px-8 py-6 md:py-8">
+        <div className="flex-1 px-3 md:px-6 lg:px-8 py-4 md:py-8">
           {/* Hero section */}
-          <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6 mb-8">
-            <div>
+          <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4 md:gap-6 md:mb-8">
+            <div className="text-center md:text-left">
               <p
                 className="text-[10px] uppercase tracking-widest font-semibold mb-2"
                 style={{
@@ -197,7 +190,7 @@ export default function BetaGuide() {
                 Help us build a better RAVA
               </h1>
               <p
-                className="mt-3 max-w-md"
+                className="mt-3 mx-auto md:mx-0 max-w-md"
                 style={{
                   fontFamily: "var(--font-inter)",
                   fontSize: 15,
@@ -209,7 +202,8 @@ export default function BetaGuide() {
                 Your input helps us build something you&apos;ll love.
               </p>
             </div>
-            <div className="flex-shrink-0 w-full md:w-auto">
+            {/* Overall Progress — desktop only */}
+            <div className="hidden md:block flex-shrink-0">
               <OverallProgress
                 completedCount={completedCount}
                 totalCount={STEPS.length}
@@ -217,15 +211,26 @@ export default function BetaGuide() {
             </div>
           </div>
 
+          {/* Mobile tab bar — sits just above the tab section */}
+          <div ref={tabSectionRef} className="-mx-4 md:hidden mb-2">
+            <TabBar
+              tabs={TABS}
+              activeTabIndex={activeTabIndex}
+              completedTabs={completedTabs}
+              responses={responses}
+              onTabChange={handleTabChange}
+            />
+          </div>
+
           {/* Tab section header */}
           <div
-            className="rounded-2xl px-5 py-6 mb-6"
+            className="rounded-2xl px-3 py-4 mb-4 md:px-5 md:py-6 md:mb-6"
             style={{
               background: "rgba(20,28,60,0.7)",
               border: "1px solid rgba(255,255,255,0.06)",
             }}
           >
-            <div className="flex flex-col md:grid md:grid-cols-[auto_1fr_auto] md:items-center gap-6">
+            <div className="grid grid-cols-[auto_1fr_auto] items-center gap-3 md:gap-6">
               {/* Left: tab info */}
               <div>
                 <p
@@ -243,7 +248,7 @@ export default function BetaGuide() {
                   style={{
                     fontFamily: "var(--font-inter)",
                     fontWeight: 700,
-                    fontSize: 18,
+                    fontSize: "clamp(14px, 3vw, 18px)",
                     color: "#FFFFFF",
                   }}
                 >
@@ -252,7 +257,7 @@ export default function BetaGuide() {
                 <p
                   style={{
                     fontFamily: "var(--font-inter)",
-                    fontSize: 12,
+                    fontSize: "clamp(10px, 2vw, 12px)",
                     color: "rgba(255,255,255,0.4)",
                     marginTop: 2,
                   }}
@@ -261,8 +266,8 @@ export default function BetaGuide() {
                 </p>
               </div>
 
-              {/* Center: step dots */}
-              <div className="flex justify-center">
+              {/* Center: step dots — scrollable on small screens, left/right cols stay fixed */}
+              <div className="overflow-x-auto min-w-0">
                 <ProgressTrack
                   steps={tabSteps}
                   currentIndex={stepInTab}

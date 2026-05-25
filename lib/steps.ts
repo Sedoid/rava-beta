@@ -20,6 +20,7 @@ export const STEPS: Step[] = [
     warning:
       'You may need to enable "Install from unknown sources" — this is normal for beta APKs and safe to do temporarily.',
     capturesIdentity: true,
+    trackLabel: "Download & Install",
     notesPlaceholder: "Any issues during install?",
   },
   {
@@ -38,6 +39,7 @@ export const STEPS: Step[] = [
       "Select your account type — Personal or Business",
       "Complete setup and proceed into the app",
     ],
+    trackLabel: "Onboarding & Sign In",
     notesPlaceholder: "Any step that felt confusing or broke?",
   },
   {
@@ -56,6 +58,7 @@ export const STEPS: Step[] = [
     ],
     warning:
       "SMS access is required for automatic transaction detection. Transactions are processed locally on your device — nothing is uploaded without your consent.",
+    trackLabel: "Grant Access & Import",
     notesPlaceholder:
       "Did your transactions import correctly? Roughly how many appeared?",
   },
@@ -78,6 +81,7 @@ export const STEPS: Step[] = [
     ],
     warning:
       "Some settings (biometric, backup) may behave differently depending on your device model and Android version.",
+    trackLabel: "Configure Preferences",
     notesPlaceholder: "Any setting that was missing, unclear, or didn't work?",
   },
 
@@ -98,6 +102,7 @@ export const STEPS: Step[] = [
       "Review your financial health score displayed on the dashboard",
     ],
     hasStars: true,
+    trackLabel: "Explore Dashboard",
     notesPlaceholder: "What would you improve on the dashboard?",
   },
   {
@@ -117,6 +122,7 @@ export const STEPS: Step[] = [
       "Tap through previous years to compare annual data",
     ],
     hasStars: true,
+    trackLabel: "Transactions & Analytics",
     notesPlaceholder: "What was hard to find? What felt intuitive?",
   },
 
@@ -136,6 +142,7 @@ export const STEPS: Step[] = [
       "Choose the category type — Expense or Income",
       "Save and repeat to create at least 3–5 categories",
     ],
+    trackLabel: "Create Categories",
     notesPlaceholder: "How intuitive was the category creation flow?",
   },
   {
@@ -154,6 +161,7 @@ export const STEPS: Step[] = [
       "Repeat for other groups until most transactions are categorised",
     ],
     hasStars: true,
+    trackLabel: "Bulk Categorise",
     notesPlaceholder: "How smooth was the bulk selection experience?",
   },
   {
@@ -172,6 +180,7 @@ export const STEPS: Step[] = [
       "Compare income vs. expense totals for the year",
     ],
     hasStars: true,
+    trackLabel: "Reinspect Stats",
     notesPlaceholder:
       "How clear and useful is the analytics view after categorisation?",
   },
@@ -192,6 +201,7 @@ export const STEPS: Step[] = [
       "Save your preferences",
       "Check the Notifications inbox to confirm alerts are appearing",
     ],
+    trackLabel: "Smart Alerts",
     notesPlaceholder: "Did the alerts make sense? Were any missing or confusing?",
   },
   {
@@ -211,6 +221,7 @@ export const STEPS: Step[] = [
       "Return to the dashboard and confirm budgets appear on the overview cards",
     ],
     hasStars: true,
+    trackLabel: "Create a Budget",
     notesPlaceholder: "How straightforward was budget creation?",
   },
   {
@@ -230,6 +241,7 @@ export const STEPS: Step[] = [
       "Enter a goal name, target amount, and target date",
       "Save and confirm the goal appears in your profile or goals list",
     ],
+    trackLabel: "Financial Goals",
     notesPlaceholder:
       "Did the planning flow make sense for how you actually think about your finances?",
   },
@@ -250,6 +262,7 @@ export const STEPS: Step[] = [
       "Check Chat Sessions to confirm your conversation history is saved",
     ],
     hasStars: true,
+    trackLabel: "AI Insights & Chat",
     notesPlaceholder: "Any suggestions for what the AI should do better?",
   },
 ];

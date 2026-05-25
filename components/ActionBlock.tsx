@@ -5,14 +5,14 @@ interface ActionBlockProps {
 export default function ActionBlock({ items }: ActionBlockProps) {
   return (
     <div
-      className="rounded-xl mb-5 px-5 py-4"
+      className="rounded-xl mb-3 px-3 py-3 md:mb-5 md:px-5 md:py-4"
       style={{
         borderLeft: "3px solid #8C52FF",
         background: "rgba(140, 82, 255, 0.08)",
       }}
     >
       {/* Header row: icon badge + "WHAT TO DO" label */}
-      <div className="flex items-center gap-2 mb-3">
+      <div className="flex items-center gap-2 mb-2">
         <div
           className="flex items-center justify-center rounded-md flex-shrink-0"
           style={{ width: 22, height: 22, background: "rgba(140,82,255,0.2)" }}
@@ -31,11 +31,11 @@ export default function ActionBlock({ items }: ActionBlockProps) {
         </p>
       </div>
 
-      <ol className="space-y-2.5">
+      <ol className="space-y-1.5 md:space-y-2.5">
         {items.map((item, i) => (
           <li
             key={i}
-            className="flex gap-3 text-[15px] leading-[1.7]"
+            className="flex gap-2 text-[15px] leading-[1.7]"
             style={{ color: "rgba(255,255,255,0.85)", fontFamily: "var(--font-inter)" }}
           >
             <span

@@ -42,7 +42,7 @@ export default function StepCard({
     <div className="lg:grid lg:grid-cols-[2fr_1fr] lg:gap-6 lg:items-start">
       {/* ── LEFT: instructions ── */}
       <div
-        className="rounded-2xl px-6 py-7 md:px-7 md:py-8 mb-4 lg:mb-0"
+        className="rounded-2xl px-4 py-4 md:px-7 md:py-8 mb-3 lg:mb-0"
         style={{
           background: "rgba(20,28,60,0.96)",
           border: "1px solid rgba(255,255,255,0.05)",
@@ -51,7 +51,7 @@ export default function StepCard({
         }}
       >
         {/* Step label row */}
-        <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center justify-between mb-3">
           <span
             className="rounded-full px-3 py-1 text-[10px] font-semibold uppercase tracking-widest"
             style={{
@@ -95,7 +95,7 @@ export default function StepCard({
         {/* Description */}
         {step.description && (
           <p
-            className="mb-6"
+            className="mb-3 md:mb-6"
             style={{
               fontFamily: "var(--font-inter)",
               fontSize: 15,
@@ -125,7 +125,7 @@ export default function StepCard({
 
       {/* ── RIGHT: video + feedback + nav ── */}
       <div
-        className="rounded-2xl px-6 py-7 md:px-7 md:py-8"
+        className="rounded-2xl px-4 py-4 md:px-7 md:py-8"
         style={{
           background: "rgba(20,28,60,0.96)",
           border: "1px solid rgba(255,255,255,0.05)",
@@ -135,7 +135,7 @@ export default function StepCard({
       >
         {/* Video section */}
         <p
-          className="text-[10px] uppercase tracking-widest font-semibold mb-3"
+          className="text-[10px] uppercase tracking-widest font-semibold mb-2"
           style={{ fontFamily: "var(--font-inter)", color: "#8C52FF" }}
         >
           Walkthrough Video
@@ -151,7 +151,7 @@ export default function StepCard({
         />
 
         {/* Navigation */}
-        <div className="flex justify-between items-center mt-6">
+        <div className="flex justify-between items-center mt-4">
           {!isFirst ? (
             <button
               onClick={onBack}
@@ -191,7 +191,7 @@ export default function StepCard({
         </div>
 
         {/* Privacy note */}
-        <div className="flex items-center gap-2 mt-4 justify-center">
+        <div className="flex items-center gap-2 mt-3 justify-center">
           <svg width="12" height="13" viewBox="0 0 12 13" fill="none" aria-hidden>
             <path
               d="M6 1L1.5 3v3.5C1.5 9.36 3.48 11.97 6 12.5c2.52-.53 4.5-3.14 4.5-6V3L6 1z"
@@ -223,8 +223,8 @@ function IdentityFields({
   onTesterChange?: (field: "name" | "device", value: string) => void;
 }) {
   return (
-    <div className="mt-5">
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+    <div className="mt-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <IconInput
           label="Your Name"
           sublabel="for testing purposes"

@@ -24,9 +24,9 @@ export default function FeedbackSection({
   const notesLen = response.notes?.length ?? 0;
 
   return (
-    <div className="mt-4">
+    <div className="mt-2 md:mt-4">
       {/* "SHARE YOUR FEEDBACK" header row */}
-      <div className="flex items-center gap-2.5 mb-3">
+      <div className="flex items-center gap-2.5 mb-2">
         <div
           className="flex items-center justify-center rounded-lg flex-shrink-0"
           style={{ width: 24, height: 24, background: "rgba(140,82,255,0.15)" }}
@@ -53,14 +53,14 @@ export default function FeedbackSection({
       </div>
 
       <p
-        className="mb-4 text-sm"
+        className="mb-2 md:mb-4 text-sm"
         style={{ fontFamily: "var(--font-inter)", color: "rgba(255,255,255,0.55)" }}
       >
         How was this step for you?
       </p>
 
       {/* Status pills — 3-column equal-width grid */}
-      <div className="grid grid-cols-3 gap-2 mb-5">
+      <div className="grid grid-cols-3 gap-2 mb-3 md:mb-5">
         <StatusPill
           label="✓ Worked as expected"
           value="Worked"
@@ -86,7 +86,7 @@ export default function FeedbackSection({
 
       {/* Star rating */}
       {hasStars && (
-        <div className="mb-5">
+        <div className="mb-3 md:mb-5">
           <div className="flex gap-1 mb-1">
             {[1, 2, 3, 4, 5].map((n) => (
               <button
