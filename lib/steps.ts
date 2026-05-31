@@ -36,6 +36,7 @@ export const STEPS: Step[] = [
       "If you chose phone number, enter the OTP sent to your phone via SMS",
       "Select the currency of your region",
     ],
+    videoUrl: "https://www.youtube.com/embed/9OvotN6HLYw?rel=0&modestbranding=1",
     warning:
       "The currency you select here will be used as the default across the entire app. Choose carefully — this affects how all your transactions and budgets are displayed.",
     warningColor: "#FF9F43",
@@ -52,10 +53,11 @@ export const STEPS: Step[] = [
     actionItems: [
       "When prompted for SMS, Notifications, and Phone permissions, tap Allow",
       "On the Select Accounts screen, choose your provider — MTN MoMo, Orange Money, or both",
-      "Wait for the app to scan and import your transaction history",
+      "Click on continue and wait for the app to scan and import your transaction history",
       "Confirm transactions are appearing in the app",
-      "To verify a specific transaction → go to Transactions → tap the Search box → search by sender name, amount, or phone number",
+      "To verify a specific transaction → navigate to Transs → tap the Search box → search by sender name, amount, or phone number",
     ],
+    videoUrl: "https://www.youtube.com/embed/9GW3BqNnqIA?rel=0&modestbranding=1",
     warning:
       "Do not close or interfere with the app while your data is loading. This usually takes a few seconds, but may take a couple of minutes if you have a large transaction history.",
     warningColor: "#FF9F43",
@@ -75,13 +77,12 @@ export const STEPS: Step[] = [
     actionItems: [
       "Tap the Settings icon from main navigation",
       "Under Preferences → set your preferred theme (Light or Dark)",
-      "Set your date format and number format to match your region",
-      "Enable Biometric Authentication if your device supports it",
+      "Under Preferences → set your preferred language",
       "Review your currency selection and update if needed",
-      "Explore Backup settings → toggle automatic backup on",
+      "Under Social → tap Share with Friends",
+      "Under Security → tap Hide Sensitive Data",
     ],
-    warning:
-      "Some settings (biometric, backup) may behave differently depending on your device model and Android version.",
+    videoUrl: "https://www.youtube.com/embed/kKNcfv5jtss?rel=0&modestbranding=1",
     trackLabel: "Configure Preferences",
     notesPlaceholder: "Any setting that was missing, unclear, or didn't work?",
   },
