@@ -41,7 +41,7 @@ export default function VideoSlot({ url, label = "Walkthrough video" }: VideoSlo
         style={{
           width: portrait ? "auto" : "80vw",
           height: portrait ? "85vh" : "auto",
-          maxWidth: portrait ? "85vw" : undefined,
+          maxWidth: portrait ? "95vw" : undefined,
           background: "rgba(14,20,48,0.98)",
           border: "1px solid rgba(140,82,255,0.2)",
           boxShadow: "0 0 80px rgba(140,82,255,0.18), 0 0 0 1px rgba(255,255,255,0.04)",
