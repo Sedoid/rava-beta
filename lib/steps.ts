@@ -14,6 +14,7 @@ export const STEPS: Step[] = [
       "Tap Install and wait for the download to complete",
       "Open RAVA from your home screen or app drawer",
     ],
+    videoUrl: "https://www.youtube.com/embed/IMtgGjJLW-k?rel=0&modestbranding=1",
     downloadUrl: "https://play.google.com/store/apps/details?id=com.sedoid.rava",
     warning:
       "This is an early beta — some features may be incomplete or behave unexpectedly. Your honest feedback at each step is what shapes the final product.",
