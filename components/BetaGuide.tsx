@@ -19,6 +19,7 @@ import TabBar from "@/components/TabBar";
 import ProgressTrack from "@/components/ProgressTrack";
 import StepCard from "@/components/StepCard";
 import CompletionScreen from "@/components/CompletionScreen";
+import AboutView from "@/components/AboutView";
 import type { StepResponse, TesterInfo } from "@/lib/types";
 
 const DEFAULT_RESPONSE: StepResponse = { status: null };
@@ -32,6 +33,7 @@ export default function BetaGuide() {
   const [tester, setTester] = useState<TesterInfo>({ name: "", device: "" });
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [showAbout, setShowAbout] = useState(false);
   const direction = useRef<1 | -1>(1);
   const hydrated = useRef(false);
   const tabSectionRef = useRef<HTMLDivElement>(null);
@@ -84,6 +86,7 @@ export default function BetaGuide() {
     direction.current = index > activeTabIndex ? 1 : -1;
     setActiveTabIndex(index);
     setStepInTab(0);
+    setShowAbout(false);
   }
 
   function autoSave() {
@@ -179,6 +182,8 @@ export default function BetaGuide() {
         activeTabIndex={activeTabIndex}
         responses={responses}
         onTabChange={handleTabChange}
+        showAbout={showAbout}
+        onAboutClick={() => setShowAbout(true)}
       />
 
       {/* Main content */}
@@ -212,7 +217,23 @@ export default function BetaGuide() {
                 }}
               >
                 Follow these steps and share your feedback at each stage.
-                Your input helps us build something you&apos;ll love.
+                Your input helps us build something you&apos;ll love.{" "}
+                <button
+                  onClick={() => setShowAbout(true)}
+                  style={{
+                    fontFamily: "var(--font-inter)",
+                    fontSize: 15,
+                    fontWeight: 600,
+                    color: "#8C52FF",
+                    background: "none",
+                    border: "none",
+                    padding: 0,
+                    cursor: "pointer",
+                    lineHeight: "inherit",
+                  }}
+                >
+                  About RAVA →
+                </button>
               </p>
             </div>
             {/* Overall Progress — desktop only */}
@@ -235,101 +256,107 @@ export default function BetaGuide() {
             />
           </div>
 
-          {/* Tab section header */}
-          <div
-            className="rounded-2xl px-3 py-4 mb-4 md:px-5 md:py-6 md:mb-6"
-            style={{
-              background: "rgba(20,28,60,0.7)",
-              border: "1px solid rgba(255,255,255,0.06)",
-            }}
-          >
-            <div className="grid grid-cols-[auto_1fr_auto] items-center gap-3 md:gap-6">
-              {/* Left: tab info */}
-              <div>
-                <p
-                  style={{
-                    fontFamily: "var(--font-inter)",
-                    fontSize: 11,
-                    color: "#8C52FF",
-                    fontWeight: 600,
-                    marginBottom: 2,
-                  }}
-                >
-                  Tab {activeTabIndex + 1} of {TABS.length}
-                </p>
-                <h3
-                  style={{
-                    fontFamily: "var(--font-inter)",
-                    fontWeight: 700,
-                    fontSize: "clamp(14px, 3vw, 18px)",
-                    color: "#FFFFFF",
-                  }}
-                >
-                  {currentTab.label}
-                </h3>
-                <p
-                  style={{
-                    fontFamily: "var(--font-inter)",
-                    fontSize: "clamp(10px, 2vw, 12px)",
-                    color: "rgba(255,255,255,0.4)",
-                    marginTop: 2,
-                  }}
-                >
-                  Complete all {tabSteps.length} step{tabSteps.length !== 1 ? "s" : ""}
-                </p>
+          {showAbout ? (
+            <AboutView onBack={() => setShowAbout(false)} />
+          ) : (
+            <>
+              {/* Tab section header */}
+              <div
+                className="rounded-2xl px-3 py-4 mb-4 md:px-5 md:py-6 md:mb-6"
+                style={{
+                  background: "rgba(20,28,60,0.7)",
+                  border: "1px solid rgba(255,255,255,0.06)",
+                }}
+              >
+                <div className="grid grid-cols-[auto_1fr_auto] items-center gap-3 md:gap-6">
+                  {/* Left: tab info */}
+                  <div>
+                    <p
+                      style={{
+                        fontFamily: "var(--font-inter)",
+                        fontSize: 11,
+                        color: "#8C52FF",
+                        fontWeight: 600,
+                        marginBottom: 2,
+                      }}
+                    >
+                      Tab {activeTabIndex + 1} of {TABS.length}
+                    </p>
+                    <h3
+                      style={{
+                        fontFamily: "var(--font-inter)",
+                        fontWeight: 700,
+                        fontSize: "clamp(14px, 3vw, 18px)",
+                        color: "#FFFFFF",
+                      }}
+                    >
+                      {currentTab.label}
+                    </h3>
+                    <p
+                      style={{
+                        fontFamily: "var(--font-inter)",
+                        fontSize: "clamp(10px, 2vw, 12px)",
+                        color: "rgba(255,255,255,0.4)",
+                        marginTop: 2,
+                      }}
+                    >
+                      Complete all {tabSteps.length} step{tabSteps.length !== 1 ? "s" : ""}
+                    </p>
+                  </div>
+
+                  {/* Center: step dots — scrollable on small screens, left/right cols stay fixed */}
+                  <div className="overflow-x-auto min-w-0">
+                    <ProgressTrack
+                      steps={tabSteps}
+                      currentIndex={stepInTab}
+                      completedIds={completedStepIds}
+                    />
+                  </div>
+
+                  {/* Right: circular % indicator */}
+                  <TabCircularProgress steps={tabSteps} completedIds={completedStepIds} />
+                </div>
               </div>
 
-              {/* Center: step dots — scrollable on small screens, left/right cols stay fixed */}
-              <div className="overflow-x-auto min-w-0">
-                <ProgressTrack
-                  steps={tabSteps}
-                  currentIndex={stepInTab}
-                  completedIds={completedStepIds}
-                />
-              </div>
+              {/* Animated step card */}
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.div
+                  key={currentStep.id}
+                  initial={{ x: direction.current * 40, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  exit={{ x: direction.current * -40, opacity: 0 }}
+                  transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  <StepCard
+                    step={currentStep}
+                    response={responses[currentStep.id]}
+                    testerName={tester.name}
+                    deviceModel={tester.device}
+                    totalStepsInTab={tabSteps.length}
+                    stepIndexInTab={stepInTab}
+                    onResponseChange={handleResponseChange}
+                    onTesterChange={handleTesterChange}
+                    onContinue={handleContinue}
+                    onBack={handleBack}
+                    isFirst={isVeryFirst}
+                    isLast={isVeryLast}
+                    isSubmitting={submitting}
+                  />
+                </motion.div>
+              </AnimatePresence>
 
-              {/* Right: circular % indicator */}
-              <TabCircularProgress steps={tabSteps} completedIds={completedStepIds} />
-            </div>
-          </div>
-
-          {/* Animated step card */}
-          <AnimatePresence mode="wait" initial={false}>
-            <motion.div
-              key={currentStep.id}
-              initial={{ x: direction.current * 40, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              exit={{ x: direction.current * -40, opacity: 0 }}
-              transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-            >
-              <StepCard
-                step={currentStep}
-                response={responses[currentStep.id]}
-                testerName={tester.name}
-                deviceModel={tester.device}
-                totalStepsInTab={tabSteps.length}
-                stepIndexInTab={stepInTab}
-                onResponseChange={handleResponseChange}
-                onTesterChange={handleTesterChange}
-                onContinue={handleContinue}
-                onBack={handleBack}
-                isFirst={isVeryFirst}
-                isLast={isVeryLast}
-                isSubmitting={submitting}
-              />
-            </motion.div>
-          </AnimatePresence>
-
-          {/* Global step counter */}
-          <p
-            className="text-center mt-6 text-[11px]"
-            style={{
-              fontFamily: "var(--font-inter)",
-              color: "rgba(255,255,255,0.25)",
-            }}
-          >
-            Step {currentStep.globalNumber} of {STEPS.length} total
-          </p>
+              {/* Global step counter */}
+              <p
+                className="text-center mt-6 text-[11px]"
+                style={{
+                  fontFamily: "var(--font-inter)",
+                  color: "rgba(255,255,255,0.25)",
+                }}
+              >
+                Step {currentStep.globalNumber} of {STEPS.length} total
+              </p>
+            </>
+          )}
         </div>
       </main>
     </div>

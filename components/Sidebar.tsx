@@ -8,6 +8,8 @@ interface SidebarProps {
   activeTabIndex: number;
   responses: Record<string, StepResponse>;
   onTabChange: (index: number) => void;
+  showAbout: boolean;
+  onAboutClick: () => void;
 }
 
 const STEP_RANGES: Record<string, string> = {
@@ -23,6 +25,8 @@ export default function Sidebar({
   activeTabIndex,
   responses,
   onTabChange,
+  showAbout,
+  onAboutClick,
 }: SidebarProps) {
   return (
     <aside
@@ -197,6 +201,57 @@ export default function Sidebar({
         })}
       </nav>
 
+      {/* About button */}
+      <div style={{ height: 1, background: "rgba(255,255,255,0.06)", margin: "0 12px 8px" }} />
+      <div className="px-3 pb-2">
+        <button
+          onClick={onAboutClick}
+          className="w-full text-left rounded-xl py-3 transition-all duration-200"
+          style={{
+            position: "relative",
+            overflow: "hidden",
+            background: showAbout ? "rgba(140,82,255,0.14)" : "transparent",
+            paddingLeft: 20,
+            paddingRight: 12,
+          }}
+          onMouseEnter={(e) => {
+            if (!showAbout)
+              (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.05)";
+          }}
+          onMouseLeave={(e) => {
+            if (!showAbout)
+              (e.currentTarget as HTMLElement).style.background = "transparent";
+          }}
+        >
+          {showAbout && (
+            <div
+              style={{
+                position: "absolute",
+                left: 0,
+                top: 6,
+                bottom: 6,
+                width: 3,
+                borderRadius: 2,
+                background: "linear-gradient(180deg, #8C52FF 0%, #F34F9A 100%)",
+              }}
+            />
+          )}
+          <div className="flex items-center gap-3">
+            <AboutIcon active={showAbout} />
+            <span
+              style={{
+                fontFamily: "var(--font-inter)",
+                fontWeight: 600,
+                fontSize: 13,
+                color: showAbout ? "#FFFFFF" : "rgba(255,255,255,0.75)",
+              }}
+            >
+              About RAVA
+            </span>
+          </div>
+        </button>
+      </div>
+
       {/* Help card */}
       <div className="px-3 py-4">
         <div
@@ -329,4 +384,15 @@ function TabIcon({ name, active }: { name: TabIconName; active: boolean }) {
         </svg>
       );
   }
+}
+
+function AboutIcon({ active }: { active: boolean }) {
+  const color = active ? "rgba(255,255,255,0.9)" : "rgba(255,255,255,0.45)";
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden>
+      <circle cx="8" cy="8" r="6" stroke={color} strokeWidth="1.5" />
+      <path d="M8 7v4" stroke={color} strokeWidth="1.5" strokeLinecap="round" />
+      <circle cx="8" cy="5.25" r="0.75" fill={color} />
+    </svg>
+  );
 }
