@@ -60,7 +60,7 @@ export default function FeedbackSection({
       </p>
 
       {/* Status pills — 3-column equal-width grid */}
-      <div className="grid grid-cols-3 gap-2 mb-3 md:mb-5">
+      <div className="grid grid-cols-3 gap-2 mb-1.5">
         <StatusPill
           label="✓ Worked as expected"
           value="Worked"
@@ -82,6 +82,22 @@ export default function FeedbackSection({
           activeColor="#EF4444"
           onClick={() => onResponseChange({ status: "No" })}
         />
+      </div>
+
+      {/* Hint — visible until a pill is selected */}
+      <div style={{ minHeight: 20, marginBottom: 12 }}>
+        {response.status === null && (
+          <p
+            style={{
+              fontFamily: "var(--font-inter)",
+              fontSize: 11,
+              color: "rgba(255,255,255,0.35)",
+              textAlign: "center",
+            }}
+          >
+            ↑ Select one option above to continue
+          </p>
+        )}
       </div>
 
       {/* Star rating */}
@@ -217,7 +233,6 @@ function StatusPill({
         border: `1px solid ${active ? activeColor + "BB" : activeColor + "44"}`,
         color: active ? activeColor : activeColor + "BB",
         fontFamily: "var(--font-inter)",
-        transform: "scale(1)",
       }}
       onMouseDown={(e) => {
         e.currentTarget.style.transform = "scale(0.97)";
